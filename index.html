@@ -17,11 +17,10 @@
         <!-- Birthday Text Top -->
         <div class="birthday-header">
             <h1 class="birthday-line1">Happyyyyy birthdayyyyy</h1>
-            <h1 class="birthday-line2">Appuuuu</h1>
-            <h1 class="birthday-line3">Dearesttttttt<span>✨️💗</span></h1>
-            <h1 class="birthday-line4">my bbbyyyyyy<span>💋</span></h1>
-            <h2 class="birthday-line5">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
-            <h2 class="birthday-line6">happyyyyy birthdayyyy toooo youuuuuuu</h2>
+            <h1 class="birthday-line2">Appuuu<span>✨️💗</span></h1>
+            <h1 class="birthday-line3">my bbbyyyyyy</h1>
+            <h2 class="birthday-line4">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
+            <h2 class="birthday-line5">happyyyyy birthdayyyy toooo youuuuuuu</h2>
         </div>
 
         <!-- Cake Section -->
@@ -93,13 +92,13 @@
         </button>
 
         <!-- Audio for Page 1 -->
-        <audio id="audio1" loop>
+        <audio id="audio1" loop preload="auto">
             <source src="birthday-song.mp3" type="audio/mpeg">
         </audio>
     </div>
 
     <!-- ============================================
-         PAGE 2 - HEARTS & MESSAGE
+         PAGE 2 - HEARTS & MESSAGE (FIXED)
          ============================================ -->
     <div class="page page-2" id="page2">
         
@@ -108,9 +107,9 @@
 
         <!-- Main Text -->
         <div class="page2-content">
-            <h1 class="hawty-text">Myyyyyyy</h1>
-            <h1 class="hawty-text big">Hawtyyyyy</h1>
-            <h1 class="hawty-text big">Shawtyyyyyyy</h1>
+            <h1 class="hawty-text line1">Myyyyyyy</h1>
+            <h1 class="hawty-text line2">Hawtyyyyy</h1>
+            <h1 class="hawty-text line3">Shawtyyyyyyy</h1>
             <h1 class="hawty-emoji">😝💋</h1>
         </div>
 
@@ -118,24 +117,23 @@
         <button class="prev-btn" onclick="goToPage(1)">⬅️ Back</button>
         <button class="next-btn" onclick="goToPage(3)">Next 💕 ➡️</button>
 
-        <!-- Audio for Page 2 -->
-        <audio id="audio2" loop>
+        <!-- Audio for Page 2 (FIXED) -->
+        <audio id="audio2" loop preload="auto">
             <source src="love-song.mp3" type="audio/mpeg">
         </audio>
     </div>
 
     <!-- ============================================
-         PAGE 3 - CAT KISS VIDEO (NO LOOP, STARTS FROM BEGINNING)
+         PAGE 3 - CAT KISS VIDEO
          ============================================ -->
     <div class="page page-3" id="page3">
         
-        <!-- Full Screen Video - NO LOOP -->
-        <video class="cat-video" id="catVideo" playsinline>
+        <!-- Full Screen Video -->
+        <video class="cat-video" id="catVideo" playsinline preload="auto">
             <source src="cat-kiss.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
 
-        <!-- Tap to Play/Unmute Overlay -->
+        <!-- Tap to Play Overlay -->
         <div class="unmute-overlay" id="unmuteOverlay" onclick="playVideoWithSound()">
             <div class="unmute-box">
                 <span class="unmute-icon">🔊</span>
@@ -154,25 +152,21 @@
             </div>
         </div>
 
-        <!-- Optional Text Overlay -->
+        <!-- Text Overlay -->
         <div class="video-overlay" id="videoOverlay">
             <p>I Love You! 💕</p>
         </div>
 
-        <!-- Sound Toggle Button -->
-        <button class="sound-toggle" id="soundToggle" onclick="toggleVideoSound()">
-            🔊
-        </button>
+        <!-- Sound Toggle -->
+        <button class="sound-toggle" id="soundToggle" onclick="toggleVideoSound()">🔊</button>
 
         <!-- Back Button -->
         <button class="prev-btn video-back" onclick="goToPage(2)">⬅️ Back</button>
     </div>
 
-    <!-- Music Toggle Button (All Pages) -->
-    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">
-        🔇
-    </button>
+    <!-- Music Toggle (All Pages) -->
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">🔇</button>
 
     <script src="script.js"></script>
 </body>
-        </html>
+                        </html>
