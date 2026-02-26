@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Baby 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============================================
+         PAGE 1 - BIRTHDAY CAKE
+         ============================================ -->
+    <div class="page page-1 active" id="page1">
+        
+        <!-- Birthday Text Top -->
+        <div class="birthday-header">
+            <h1 class="birthday-line1">Happyyyyy birthdayyyyy</h1>
+            <h1 class="birthday-line2">Dearesttttttt<span>✨️💗</span></h1>
+            <h1 class="birthday-line3">my bbbyyyyyy<span>💋</span></h1>
+            <h2 class="birthday-line4">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
+            <h2 class="birthday-line5">happyyyyy birthdayyyy toooo youuuuuuu</h2>
+        </div>
+
+        <!-- Cake Section -->
+        <div class="cake-container">
+            
+            <!-- Candles -->
+            <div class="candles">
+                <div class="candle">
+                    <div class="flame" id="flame1"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame" id="flame2"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame" id="flame3"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame" id="flame4"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame" id="flame5"></div>
+                </div>
+            </div>
+
+            <!-- Cake -->
+            <div class="cake">
+                <div class="cake-top">
+                    <div class="cream-drip"></div>
+                    <div class="cream-drip"></div>
+                    <div class="cream-drip"></div>
+                    <div class="cream-drip"></div>
+                    <div class="cream-drip"></div>
+                </div>
+                <div class="cake-layer layer1">
+                    <div class="layer-decoration">
+                        <span>💕</span><span>💕</span><span>💕</span><span>💕</span>
+                    </div>
+                </div>
+                <div class="cake-layer layer2">
+                    <div class="layer-decoration">
+                        <span>✨</span><span>✨</span><span>✨</span><span>✨</span><span>✨</span>
+                    </div>
+                </div>
+                <div class="cake-layer layer3">
+                    <div class="layer-decoration">
+                        <span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span>
+                    </div>
+                </div>
+                <div class="cake-plate"></div>
+            </div>
+        </div>
+
+        <!-- Blow Section -->
+        <div class="blow-section">
+            <p class="blow-instruction" id="blowInstruction">🎤 Button dabao aur candles bujhao!</p>
+            <div class="blow-progress" id="blowProgress">
+                <div class="progress-bar" id="progressBar"></div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+            <button class="blow-btn" id="blowBtn" onclick="startBlowing()">
+                🎤 Phook Maaro!
+            </button>
+            <p class="success-msg" id="successMsg">🎉 Yayyy! Wish Poori Hogi! 🎉</p>
+        </div>
+
+        <!-- Next Button -->
+        <button class="next-btn" id="nextBtn1" onclick="goToPage(2)">
+            Next 💕 ➡️
+        </button>
+
+        <!-- Audio for Page 1 -->
+        <audio id="audio1" loop>
+            <source src="birthday-song.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- ============================================
+         PAGE 2 - HEARTS & MESSAGE
+         ============================================ -->
+    <div class="page page-2" id="page2">
+        
+        <!-- Floating Hearts Container -->
+        <div class="hearts-bg" id="heartsBg"></div>
+
+        <!-- Main Text -->
+        <div class="page2-content">
+            <h1 class="hawty-text">Myyyyyyy</h1>
+            <h1 class="hawty-text big">Hawtyyyyy</h1>
+            <h1 class="hawty-text big">Shawtyyyyyyy</h1>
+            <h1 class="hawty-emoji">😝💋</h1>
+        </div>
+
+        <!-- Navigation -->
+        <button class="prev-btn" onclick="goToPage(1)">⬅️ Back</button>
+        <button class="next-btn" onclick="goToPage(3)">Next 💕 ➡️</button>
+
+        <!-- Audio for Page 2 -->
+        <audio id="audio2" loop>
+            <source src="love-song.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- ============================================
+         PAGE 3 - CAT KISS VIDEO
+         ============================================ -->
+    <div class="page page-3" id="page3">
+        
+        <!-- Full Screen Video -->
+        <video class="cat-video" id="catVideo" autoplay loop muted playsinline>
+            <source src="cat-kiss.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Optional Overlay Text -->
+        <div class="video-overlay">
+            <p>I Love You! 💕</p>
+        </div>
+
+        <!-- Back Button -->
+        <button class="prev-btn video-back" onclick="goToPage(2)">⬅️ Back</button>
+    </div>
+
+    <!-- Music Toggle Button (Fixed) -->
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+        🔇
+    </button>
+
+    <script src="script.js"></script>
+</body>
+                      </html>
