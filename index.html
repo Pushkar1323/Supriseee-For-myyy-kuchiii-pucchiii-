@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday My Baby 💕</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Appu 💕</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,10 +17,11 @@
         <!-- Birthday Text Top -->
         <div class="birthday-header">
             <h1 class="birthday-line1">Happyyyyy birthdayyyyy</h1>
-            <h1 class="birthday-line2">Dearesttttttt<span>✨️💗</span></h1>
-            <h1 class="birthday-line3">my bbbyyyyyy<span>💋</span></h1>
-            <h2 class="birthday-line4">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
-            <h2 class="birthday-line5">happyyyyy birthdayyyy toooo youuuuuuu</h2>
+            <h1 class="birthday-line2">Appuuuu</h1>
+            <h1 class="birthday-line3">Dearesttttttt<span>✨️💗</span></h1>
+            <h1 class="birthday-line4">my bbbyyyyyy<span>💋</span></h1>
+            <h2 class="birthday-line5">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
+            <h2 class="birthday-line6">happyyyyy birthdayyyy toooo youuuuuuu</h2>
         </div>
 
         <!-- Cake Section -->
@@ -124,30 +125,54 @@
     </div>
 
     <!-- ============================================
-         PAGE 3 - CAT KISS VIDEO
+         PAGE 3 - CAT KISS VIDEO (NO LOOP, STARTS FROM BEGINNING)
          ============================================ -->
     <div class="page page-3" id="page3">
         
-        <!-- Full Screen Video -->
-        <video class="cat-video" id="catVideo" autoplay loop muted playsinline>
+        <!-- Full Screen Video - NO LOOP -->
+        <video class="cat-video" id="catVideo" playsinline>
             <source src="cat-kiss.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <!-- Optional Overlay Text -->
-        <div class="video-overlay">
+        <!-- Tap to Play/Unmute Overlay -->
+        <div class="unmute-overlay" id="unmuteOverlay" onclick="playVideoWithSound()">
+            <div class="unmute-box">
+                <span class="unmute-icon">🔊</span>
+                <p>Tap to Play with Sound!</p>
+                <span class="tap-hint">👆</span>
+            </div>
+        </div>
+
+        <!-- Video End Screen -->
+        <div class="video-end-screen" id="videoEndScreen">
+            <div class="end-content">
+                <span class="end-emoji">💕</span>
+                <h2>I Love You Appu!</h2>
+                <p>Forever & Always ❤️</p>
+                <button class="replay-btn" onclick="replayVideo()">🔄 Watch Again</button>
+            </div>
+        </div>
+
+        <!-- Optional Text Overlay -->
+        <div class="video-overlay" id="videoOverlay">
             <p>I Love You! 💕</p>
         </div>
+
+        <!-- Sound Toggle Button -->
+        <button class="sound-toggle" id="soundToggle" onclick="toggleVideoSound()">
+            🔊
+        </button>
 
         <!-- Back Button -->
         <button class="prev-btn video-back" onclick="goToPage(2)">⬅️ Back</button>
     </div>
 
-    <!-- Music Toggle Button (Fixed) -->
+    <!-- Music Toggle Button (All Pages) -->
     <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">
         🔇
     </button>
 
     <script src="script.js"></script>
 </body>
-                      </html>
+        </html>
