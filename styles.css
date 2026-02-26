@@ -1,6 +1,3 @@
-/* ============================================
-   RESET & BASE
-   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -9,107 +6,85 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
     background: #000;
-    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
 }
 
-/* ============================================
-   PAGE STRUCTURE
-   ============================================ */
+/* ========== PAGES ========== */
 .page {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
+    width: 100%;
+    height: 100%;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease;
-    z-index: 1;
 }
 
 .page.active {
-    opacity: 1;
-    visibility: visible;
-    z-index: 10;
+    display: flex;
 }
 
-/* ============================================
-   PAGE 1 - BIRTHDAY CAKE
-   ============================================ */
-.page-1 {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    padding: 10px;
+.hide {
+    display: none !important;
+}
+
+/* ========== PAGE 1 ========== */
+.page1 {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    padding: 15px;
+    padding-top: 20px;
     overflow-y: auto;
     justify-content: flex-start;
-    padding-top: 20px;
 }
 
-/* Birthday Header */
 .birthday-header {
     text-align: center;
     margin-bottom: 10px;
 }
 
-.birthday-line1 {
+.line1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 34px;
+    font-size: 32px;
     color: #ff6b6b;
-    animation: bounce 1s ease infinite;
+    animation: bounce 1s infinite;
 }
 
-.birthday-line2 {
+.line2 {
     font-family: 'Great Vibes', cursive;
-    font-size: 52px;
+    font-size: 48px;
     color: #ffe66d;
-    margin-top: 0;
-    text-shadow: 0 0 20px #ffe66d, 0 0 40px #ffe66d;
-    animation: glow 1.5s ease infinite alternate;
+    text-shadow: 0 0 20px #ffe66d;
 }
 
-.birthday-line2 span {
-    display: inline-block;
-    animation: pulse 0.5s ease infinite;
+.line2 span {
     margin-left: 5px;
 }
 
-@keyframes glow {
-    0% { text-shadow: 0 0 20px #ffe66d, 0 0 40px #ffe66d; }
-    100% { text-shadow: 0 0 30px #ff69b4, 0 0 60px #ff69b4, 0 0 80px #ff69b4; }
-}
-
-.birthday-line3 {
+.line3 {
     font-family: 'Great Vibes', cursive;
-    font-size: 40px;
+    font-size: 38px;
     color: #ff69b4;
-    margin-top: 0;
-    animation: kiss 1s ease infinite;
 }
 
-.birthday-line4 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 22px;
+.line4 {
+    font-size: 20px;
     color: #fff;
-    margin-top: 8px;
-    font-weight: 700;
+    margin-top: 5px;
 }
 
-.birthday-line4 span {
+.line4 span {
+    animation: kiss 0.5s infinite;
     display: inline-block;
-    animation: kiss 0.4s ease infinite;
-    margin-left: 5px;
 }
 
-.birthday-line5 {
+.line5 {
     font-family: 'Great Vibes', cursive;
-    font-size: 30px;
+    font-size: 28px;
     color: #4ecdc4;
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 @keyframes bounce {
@@ -117,32 +92,25 @@ body {
     50% { transform: translateY(-8px); }
 }
 
-@keyframes pulse {
+@keyframes kiss {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
 }
 
-@keyframes kiss {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    25% { transform: scale(1.15) rotate(-8deg); }
-    75% { transform: scale(1.15) rotate(8deg); }
-}
-
-/* Cake Container */
-.cake-container {
+/* Cake */
+.cake-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px 0;
     transform: scale(0.8);
+    margin: 10px 0;
 }
 
-/* Candles */
 .candles {
     display: flex;
-    gap: 20px;
+    gap: 18px;
     margin-bottom: -5px;
-    z-index: 10;
+    z-index: 2;
 }
 
 .candle {
@@ -166,566 +134,387 @@ body {
 
 .flame {
     position: absolute;
-    top: -30px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
     width: 10px;
-    height: 22px;
-    background: linear-gradient(to top, #ff6b35, #f7c600 50%, #fff 100%);
+    height: 20px;
+    background: linear-gradient(#fff, #f7c600, #ff6b35);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    animation: flicker 0.2s ease-in-out infinite alternate;
-    transition: all 0.5s ease;
+    animation: flicker 0.2s infinite alternate;
 }
 
-.flame.blown {
-    opacity: 0;
-    transform: translateX(-50%) scale(0);
+.flame.off {
+    display: none;
 }
 
 @keyframes flicker {
-    0% { transform: translateX(-50%) scale(1) rotate(-3deg); }
-    100% { transform: translateX(-50%) scale(1.1) rotate(3deg); }
+    0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
 }
 
-/* Cake */
 .cake {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.cake-top {
-    width: 140px;
-    height: 18px;
-    background: linear-gradient(to bottom, #fff, #ffeaa7);
-    border-radius: 100px 100px 0 0;
-    position: relative;
+.layer {
     display: flex;
     justify-content: space-around;
-    padding-top: 12px;
+    align-items: center;
+    border-radius: 5px;
 }
 
-.cream-drip {
-    width: 15px;
-    height: 24px;
-    background: linear-gradient(to bottom, #fff, #ffeaa7);
-    border-radius: 0 0 50% 50%;
-    margin-top: 3px;
-    animation: drip 2s ease infinite;
+.l1 {
+    width: 150px;
+    height: 42px;
+    background: linear-gradient(#ff69b4, #ff1493);
 }
 
-@keyframes drip {
-    0%, 100% { height: 24px; }
-    50% { height: 34px; }
-}
-
-.cake-layer {
-    position: relative;
-}
-
-.layer1 {
-    width: 160px;
+.l2 {
+    width: 180px;
     height: 45px;
-    background: linear-gradient(to bottom, #ff69b4, #ff1493);
-    border-radius: 5px;
+    background: linear-gradient(#fff5f5, #ffd1dc);
+    margin-top: -3px;
 }
 
-.layer2 {
-    width: 190px;
+.l3 {
+    width: 210px;
     height: 48px;
-    background: linear-gradient(to bottom, #fff5f5, #ffd1dc);
-    border-radius: 5px;
-    margin-top: -4px;
+    background: linear-gradient(#ff69b4, #ff1493);
+    margin-top: -3px;
 }
 
-.layer3 {
-    width: 220px;
-    height: 52px;
-    background: linear-gradient(to bottom, #ff69b4, #ff1493);
-    border-radius: 5px;
-    margin-top: -4px;
-}
-
-.layer-decoration {
-    position: absolute;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    top: 50%;
-    transform: translateY(-50%);
+.layer span {
     font-size: 14px;
 }
 
-.cake-plate {
-    width: 250px;
-    height: 18px;
-    background: linear-gradient(to bottom, #f0f0f0, #ddd);
+.plate {
+    width: 240px;
+    height: 15px;
+    background: linear-gradient(#f0f0f0, #ccc);
     border-radius: 50%;
-    margin-top: 4px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    margin-top: 3px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* Blow Section */
-.blow-section {
+.blow-box {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-.blow-instruction {
+.blow-text {
     color: #ffe66d;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
-.blow-progress {
-    width: 220px;
-    height: 22px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    margin: 0 auto 12px;
+.progress {
+    width: 200px;
+    height: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    margin: 0 auto 10px;
     position: relative;
-    overflow: hidden;
     display: none;
 }
 
-.blow-progress.show {
+.progress.show {
     display: block;
 }
 
-.progress-bar {
+.bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #4ecdc4, #44bd32, #ffe66d);
-    border-radius: 15px;
-    transition: width 0.1s ease;
+    background: linear-gradient(90deg, #4ecdc4, #ffe66d);
+    border-radius: 10px;
 }
 
-.progress-text {
+#percent {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-    font-weight: 700;
-    font-size: 12px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
 }
 
 .blow-btn {
-    padding: 14px 35px;
-    font-size: 16px;
+    padding: 12px 30px;
+    font-size: 15px;
     font-weight: 600;
     background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
     border: none;
     border-radius: 50px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(255,107,107,0.4);
 }
 
-.blow-btn:active {
-    transform: scale(0.95);
-}
-
-.blow-btn.listening {
+.blow-btn.on {
     background: linear-gradient(45deg, #4CAF50, #8BC34A);
-    animation: pulse 1s infinite;
 }
 
-.success-msg {
+.success {
     color: #ffe66d;
-    font-size: 20px;
-    margin-top: 12px;
+    font-size: 18px;
+    margin-top: 10px;
     display: none;
-    animation: bounceIn 0.5s ease;
 }
 
-.success-msg.show {
+.success.show {
     display: block;
+    animation: pop 0.5s;
 }
 
-@keyframes bounceIn {
+@keyframes pop {
     0% { transform: scale(0); }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
 
-/* Navigation Buttons */
-.next-btn, .prev-btn {
-    position: fixed;
-    bottom: 25px;
-    padding: 12px 30px;
-    font-size: 14px;
-    font-weight: 600;
-    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-    border: none;
-    border-radius: 50px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
-    z-index: 100;
-}
-
-.next-btn {
-    right: 20px;
-}
-
-.prev-btn {
-    left: 20px;
-}
-
-.next-btn:active, .prev-btn:active {
-    transform: scale(0.95);
-}
-
-#nextBtn1 {
-    display: none;
-}
-
-#nextBtn1.show {
-    display: block;
-}
-
-/* ============================================
-   PAGE 2 - HEARTS & MESSAGE (FIXED - NO GLITCH)
-   ============================================ */
-.page-2 {
+/* ========== PAGE 2 - SIMPLE NO LAG ========== */
+.page2 {
     background: #000;
-    overflow: hidden;
 }
 
-.hearts-bg {
+.hearts-box {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    z-index: 1;
     overflow: hidden;
+    z-index: 1;
 }
 
-.floating-heart {
+.heart {
     position: absolute;
-    will-change: transform;
-    animation: floatHeart 5s linear forwards;
+    font-size: 28px;
+    animation: float 6s linear infinite;
 }
 
-@keyframes floatHeart {
+/* Each heart different position & delay */
+.h1 { left: 5%; animation-delay: 0s; }
+.h2 { left: 15%; animation-delay: 0.5s; }
+.h3 { left: 25%; animation-delay: 1s; }
+.h4 { left: 35%; animation-delay: 1.5s; }
+.h5 { left: 45%; animation-delay: 2s; }
+.h6 { left: 55%; animation-delay: 2.5s; }
+.h7 { left: 65%; animation-delay: 3s; }
+.h8 { left: 75%; animation-delay: 3.5s; }
+.h9 { left: 85%; animation-delay: 4s; }
+.h10 { left: 10%; animation-delay: 4.5s; }
+.h11 { left: 50%; animation-delay: 5s; }
+.h12 { left: 90%; animation-delay: 5.5s; }
+
+@keyframes float {
     0% {
         transform: translateY(100vh) scale(0.8);
         opacity: 0;
     }
-    5% {
+    10% {
         opacity: 1;
     }
-    95% {
+    90% {
         opacity: 1;
     }
     100% {
-        transform: translateY(-20vh) scale(1);
+        transform: translateY(-50px) scale(1.1);
         opacity: 0;
     }
 }
 
-.page2-content {
+.page2-text {
     text-align: center;
     z-index: 10;
-    position: relative;
 }
 
-.hawty-text {
+.page2-text h1 {
     font-family: 'Great Vibes', cursive;
+    font-size: 45px;
     color: #ff69b4;
-    text-shadow: 0 0 30px #ff69b4, 0 0 60px #ff69b4;
-    animation: glowText 2s ease infinite alternate;
+    text-shadow: 0 0 30px #ff69b4;
     line-height: 1.1;
 }
 
-.hawty-text.line1 {
-    font-size: 48px;
+.page2-text h1.big {
+    font-size: 55px;
+    color: #ff1493;
+    text-shadow: 0 0 40px #ff1493;
 }
 
-.hawty-text.line2 {
+.page2-text .emoji {
     font-size: 60px;
-    color: #ff1493;
-    text-shadow: 0 0 40px #ff1493, 0 0 80px #ff1493;
+    margin-top: 15px;
+    animation: bounce 1s infinite;
 }
 
-.hawty-text.line3 {
-    font-size: 58px;
-    color: #ff1493;
-    text-shadow: 0 0 40px #ff1493, 0 0 80px #ff1493;
-}
-
-.hawty-emoji {
-    font-size: 70px;
-    margin-top: 20px;
-    animation: bounce 1s ease infinite;
-}
-
-@keyframes glowText {
-    0% { 
-        text-shadow: 0 0 30px #ff69b4, 0 0 60px #ff69b4;
-        filter: brightness(1);
-    }
-    100% { 
-        text-shadow: 0 0 50px #ff1493, 0 0 100px #ff1493, 0 0 150px #ff1493;
-        filter: brightness(1.2);
-    }
-}
-
-/* ============================================
-   PAGE 3 - VIDEO
-   ============================================ */
-.page-3 {
+/* ========== PAGE 3 ========== */
+.page3 {
     background: #000;
-    padding: 0;
 }
 
-.cat-video {
+.video {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 100%;
     min-height: 100%;
-    width: auto;
-    height: auto;
     object-fit: cover;
-    z-index: 1;
 }
 
-/* Tap to Play Overlay */
-.unmute-overlay {
+.tap-screen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0,0,0,0.85);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 50;
-    cursor: pointer;
 }
 
-.unmute-overlay.hidden {
+.tap-screen.hide {
     display: none;
 }
 
-.unmute-box {
+.tap-box {
     text-align: center;
-    color: white;
+    color: #fff;
 }
 
-.unmute-icon {
-    font-size: 100px;
+.tap-box span {
+    font-size: 80px;
     display: block;
-    margin-bottom: 25px;
-    animation: pulse 1.5s ease infinite;
 }
 
-.unmute-box p {
+.tap-box p {
     font-size: 22px;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
 
-.tap-hint {
+.tap-box .hand {
     font-size: 50px;
-    display: block;
-    animation: bounce 0.8s ease infinite;
+    animation: bounce 0.8s infinite;
 }
 
-/* Video End Screen */
-.video-end-screen {
+.end-screen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 60;
+    color: #fff;
 }
 
-.video-end-screen.show {
-    display: flex;
+.end-screen span {
+    font-size: 80px;
+    animation: bounce 1s infinite;
 }
 
-.end-content {
-    text-align: center;
-    color: white;
-}
-
-.end-emoji {
-    font-size: 90px;
-    display: block;
-    margin-bottom: 20px;
-    animation: pulse 1s ease infinite;
-}
-
-.end-content h2 {
+.end-screen h2 {
     font-family: 'Great Vibes', cursive;
-    font-size: 55px;
+    font-size: 50px;
     color: #ff69b4;
-    margin-bottom: 15px;
-    text-shadow: 0 0 30px #ff69b4;
+    margin: 15px 0;
 }
 
-.end-content p {
-    font-size: 24px;
+.end-screen p {
+    font-size: 22px;
     color: #ffe66d;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.replay-btn {
-    padding: 16px 45px;
+.end-screen button {
+    padding: 15px 40px;
     font-size: 18px;
     font-weight: 600;
     background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
     border: none;
     border-radius: 50px;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 5px 25px rgba(255, 107, 107, 0.5);
+    color: #fff;
 }
 
-.replay-btn:active {
-    transform: scale(0.95);
-}
-
-/* Sound Toggle */
-.sound-toggle {
+.sound-btn {
     position: absolute;
     top: 20px;
     left: 20px;
-    width: 55px;
-    height: 55px;
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 50px;
+    height: 50px;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid rgba(255,255,255,0.3);
     border-radius: 50%;
-    font-size: 28px;
-    cursor: pointer;
-    z-index: 100;
-    display: none;
-}
-
-.sound-toggle.show {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.sound-toggle:active {
-    transform: scale(0.9);
-}
-
-/* Video Overlay Text */
-.video-overlay {
-    position: absolute;
-    bottom: 110px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 20;
-    display: none;
-}
-
-.video-overlay.show {
-    display: block;
-}
-
-.video-overlay p {
-    font-family: 'Great Vibes', cursive;
-    font-size: 45px;
-    color: white;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9), 0 0 40px #ff69b4;
-    animation: pulse 2s ease infinite;
-}
-
-.video-back {
+    font-size: 24px;
     z-index: 100;
 }
 
-/* ============================================
-   MUSIC TOGGLE
-   ============================================ */
-.music-toggle {
+/* ========== BUTTONS ========== */
+.next-btn, .prev-btn {
+    position: fixed;
+    bottom: 25px;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    z-index: 100;
+}
+
+.next-btn { right: 20px; }
+.prev-btn { left: 20px; }
+
+.music-btn {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.15);
     border: none;
-    font-size: 24px;
-    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
     z-index: 1000;
 }
 
-.music-toggle:active {
-    transform: scale(0.9);
-}
-
-/* ============================================
-   CONFETTI
-   ============================================ */
+/* ========== CONFETTI ========== */
 .confetti {
     position: fixed;
-    top: -20px;
+    top: -10px;
     z-index: 1000;
-    pointer-events: none;
-    animation: confettiFall linear forwards;
+    animation: fall 3s linear forwards;
 }
 
-@keyframes confettiFall {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
+@keyframes fall {
+    to {
         transform: translateY(100vh) rotate(720deg);
         opacity: 0;
     }
 }
 
-/* ============================================
-   RESPONSIVE
-   ============================================ */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 380px) {
-    .birthday-line1 { font-size: 28px; }
-    .birthday-line2 { font-size: 42px; }
-    .birthday-line3 { font-size: 34px; }
-    .birthday-line4 { font-size: 18px; }
-    .birthday-line5 { font-size: 24px; }
-    
-    .cake-container { transform: scale(0.7); }
-    
-    .hawty-text.line1 { font-size: 38px; }
-    .hawty-text.line2, .hawty-text.line3 { font-size: 48px; }
-    .hawty-emoji { font-size: 55px; }
-    
-    .unmute-icon { font-size: 70px; }
-    .unmute-box p { font-size: 18px; }
-    
-    .end-content h2 { font-size: 42px; }
-    .video-overlay p { font-size: 35px; }
-}
-
-@media (max-height: 500px) {
-    .page-1 { padding-top: 10px; }
-    .birthday-line1 { font-size: 22px; }
-    .birthday-line2 { font-size: 34px; }
-    .birthday-line3 { font-size: 28px; }
-    .birthday-line4 { font-size: 16px; }
-    .birthday-line5 { font-size: 20px; }
-    .cake-container { transform: scale(0.55); margin: 5px 0; }
+    .line1 { font-size: 26px; }
+    .line2 { font-size: 38px; }
+    .line3 { font-size: 30px; }
+    .line4 { font-size: 16px; }
+    .line5 { font-size: 22px; }
+    .cake-box { transform: scale(0.7); }
+    .page2-text h1 { font-size: 36px; }
+    .page2-text h1.big { font-size: 44px; }
+    .page2-text .emoji { font-size: 50px; }
    }
