@@ -4,169 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Appu 💕</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- ============================================
-         PAGE 1 - BIRTHDAY CAKE
-         ============================================ -->
-    <div class="page page-1 active" id="page1">
+    <!-- PAGE 1 - BIRTHDAY CAKE -->
+    <div class="page page1 active" id="page1">
         
-        <!-- Birthday Text Top -->
         <div class="birthday-header">
-            <h1 class="birthday-line1">Happyyyyy birthdayyyyy</h1>
-            <h1 class="birthday-line2">Appuuu<span>✨️💗</span></h1>
-            <h1 class="birthday-line3">my bbbyyyyyy</h1>
-            <h2 class="birthday-line4">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
-            <h2 class="birthday-line5">happyyyyy birthdayyyy toooo youuuuuuu</h2>
+            <h1 class="line1">Happyyyyy birthdayyyyy</h1>
+            <h1 class="line2">Appuuu<span>✨️💗</span></h1>
+            <h1 class="line3">my bbbyyyyyy</h1>
+            <h2 class="line4">Mwahhhhhhhh<span>💋💋💋💋💋</span></h2>
+            <h2 class="line5">happyyyyy birthdayyyy toooo youuuuuuu</h2>
         </div>
 
-        <!-- Cake Section -->
-        <div class="cake-container">
-            
-            <!-- Candles -->
+        <div class="cake-box">
             <div class="candles">
-                <div class="candle">
-                    <div class="flame" id="flame1"></div>
-                </div>
-                <div class="candle">
-                    <div class="flame" id="flame2"></div>
-                </div>
-                <div class="candle">
-                    <div class="flame" id="flame3"></div>
-                </div>
-                <div class="candle">
-                    <div class="flame" id="flame4"></div>
-                </div>
-                <div class="candle">
-                    <div class="flame" id="flame5"></div>
-                </div>
+                <div class="candle"><div class="flame" id="f1"></div></div>
+                <div class="candle"><div class="flame" id="f2"></div></div>
+                <div class="candle"><div class="flame" id="f3"></div></div>
+                <div class="candle"><div class="flame" id="f4"></div></div>
+                <div class="candle"><div class="flame" id="f5"></div></div>
             </div>
-
-            <!-- Cake -->
             <div class="cake">
-                <div class="cake-top">
-                    <div class="cream-drip"></div>
-                    <div class="cream-drip"></div>
-                    <div class="cream-drip"></div>
-                    <div class="cream-drip"></div>
-                    <div class="cream-drip"></div>
-                </div>
-                <div class="cake-layer layer1">
-                    <div class="layer-decoration">
-                        <span>💕</span><span>💕</span><span>💕</span><span>💕</span>
-                    </div>
-                </div>
-                <div class="cake-layer layer2">
-                    <div class="layer-decoration">
-                        <span>✨</span><span>✨</span><span>✨</span><span>✨</span><span>✨</span>
-                    </div>
-                </div>
-                <div class="cake-layer layer3">
-                    <div class="layer-decoration">
-                        <span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span>
-                    </div>
-                </div>
-                <div class="cake-plate"></div>
+                <div class="layer l1"><span>💕</span><span>💕</span><span>💕</span></div>
+                <div class="layer l2"><span>✨</span><span>✨</span><span>✨</span><span>✨</span></div>
+                <div class="layer l3"><span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span><span>🍓</span></div>
+                <div class="plate"></div>
             </div>
         </div>
 
-        <!-- Blow Section -->
-        <div class="blow-section">
-            <p class="blow-instruction" id="blowInstruction">🎤 Button dabao aur candles bujhao!</p>
-            <div class="blow-progress" id="blowProgress">
-                <div class="progress-bar" id="progressBar"></div>
-                <span class="progress-text" id="progressText">0%</span>
+        <div class="blow-box">
+            <p class="blow-text" id="blowText">🎤 Button dabao aur candles bujhao!</p>
+            <div class="progress" id="progress">
+                <div class="bar" id="bar"></div>
+                <span id="percent">0%</span>
             </div>
-            <button class="blow-btn" id="blowBtn" onclick="startBlowing()">
-                🎤 Phook Maaro!
-            </button>
-            <p class="success-msg" id="successMsg">🎉 Yayyy! Wish Poori Hogi! 🎉</p>
+            <button class="blow-btn" id="blowBtn" onclick="startBlow()">🎤 Phook Maaro!</button>
+            <p class="success" id="success">🎉 Wish Poori Hogi! 🎉</p>
         </div>
 
-        <!-- Next Button -->
-        <button class="next-btn" id="nextBtn1" onclick="goToPage(2)">
-            Next 💕 ➡️
-        </button>
-
-        <!-- Audio for Page 1 -->
-        <audio id="audio1" loop preload="auto">
-            <source src="birthday-song.mp3" type="audio/mpeg">
-        </audio>
+        <button class="next-btn hide" id="next1" onclick="goPage(2)">Next 💕 ➡️</button>
     </div>
 
-    <!-- ============================================
-         PAGE 2 - HEARTS & MESSAGE (FIXED)
-         ============================================ -->
-    <div class="page page-2" id="page2">
+    <!-- PAGE 2 - SIMPLE HEARTS (NO LAG) -->
+    <div class="page page2" id="page2">
         
-        <!-- Floating Hearts Container -->
-        <div class="hearts-bg" id="heartsBg"></div>
-
-        <!-- Main Text -->
-        <div class="page2-content">
-            <h1 class="hawty-text line1">Myyyyyyy</h1>
-            <h1 class="hawty-text line2">Hawtyyyyy</h1>
-            <h1 class="hawty-text line3">Shawtyyyyyyy</h1>
-            <h1 class="hawty-emoji">😝💋</h1>
+        <!-- Pre-made hearts - NO JavaScript creation = NO LAG -->
+        <div class="hearts-box">
+            <span class="heart h1">❤️</span>
+            <span class="heart h2">💕</span>
+            <span class="heart h3">💖</span>
+            <span class="heart h4">💗</span>
+            <span class="heart h5">💓</span>
+            <span class="heart h6">❤️</span>
+            <span class="heart h7">💕</span>
+            <span class="heart h8">💖</span>
+            <span class="heart h9">💗</span>
+            <span class="heart h10">💓</span>
+            <span class="heart h11">❤️</span>
+            <span class="heart h12">💕</span>
         </div>
 
-        <!-- Navigation -->
-        <button class="prev-btn" onclick="goToPage(1)">⬅️ Back</button>
-        <button class="next-btn" onclick="goToPage(3)">Next 💕 ➡️</button>
+        <div class="page2-text">
+            <h1>Myyyyyyy</h1>
+            <h1 class="big">Hawtyyyyy</h1>
+            <h1 class="big">Shawtyyyyyyy</h1>
+            <h1 class="emoji">😝💋</h1>
+        </div>
 
-        <!-- Audio for Page 2 (FIXED) -->
-        <audio id="audio2" loop preload="auto">
-            <source src="love-song.mp3" type="audio/mpeg">
-        </audio>
+        <button class="prev-btn" onclick="goPage(1)">⬅️ Back</button>
+        <button class="next-btn" onclick="goPage(3)">Next 💕 ➡️</button>
     </div>
 
-    <!-- ============================================
-         PAGE 3 - CAT KISS VIDEO
-         ============================================ -->
-    <div class="page page-3" id="page3">
+    <!-- PAGE 3 - VIDEO -->
+    <div class="page page3" id="page3">
         
-        <!-- Full Screen Video -->
-        <video class="cat-video" id="catVideo" playsinline preload="auto">
+        <video class="video" id="video" playsinline>
             <source src="cat-kiss.mp4" type="video/mp4">
         </video>
 
-        <!-- Tap to Play Overlay -->
-        <div class="unmute-overlay" id="unmuteOverlay" onclick="playVideoWithSound()">
-            <div class="unmute-box">
-                <span class="unmute-icon">🔊</span>
-                <p>Tap to Play with Sound!</p>
-                <span class="tap-hint">👆</span>
+        <div class="tap-screen" id="tapScreen" onclick="playVideo()">
+            <div class="tap-box">
+                <span>🔊</span>
+                <p>Tap to Play!</p>
+                <span class="hand">👆</span>
             </div>
         </div>
 
-        <!-- Video End Screen -->
-        <div class="video-end-screen" id="videoEndScreen">
-            <div class="end-content">
-                <span class="end-emoji">💕</span>
-                <h2>I Love You Appu!</h2>
-                <p>Forever & Always ❤️</p>
-                <button class="replay-btn" onclick="replayVideo()">🔄 Watch Again</button>
-            </div>
+        <div class="end-screen hide" id="endScreen">
+            <span>💕</span>
+            <h2>I Love You Appu!</h2>
+            <p>Forever & Always ❤️</p>
+            <button onclick="replayVideo()">🔄 Watch Again</button>
         </div>
 
-        <!-- Text Overlay -->
-        <div class="video-overlay" id="videoOverlay">
-            <p>I Love You! 💕</p>
-        </div>
-
-        <!-- Sound Toggle -->
-        <button class="sound-toggle" id="soundToggle" onclick="toggleVideoSound()">🔊</button>
-
-        <!-- Back Button -->
-        <button class="prev-btn video-back" onclick="goToPage(2)">⬅️ Back</button>
+        <button class="sound-btn hide" id="soundBtn" onclick="toggleSound()">🔊</button>
+        <button class="prev-btn" onclick="goPage(2)">⬅️ Back</button>
     </div>
 
-    <!-- Music Toggle (All Pages) -->
-    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">🔇</button>
+    <!-- AUDIO - Simple direct audio tags -->
+    <audio id="music1" src="birthday-song.mp3" loop></audio>
+    <audio id="music2" src="love-song.mp3" loop></audio>
+
+    <!-- Music Toggle -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</button>
 
     <script src="script.js"></script>
 </body>
-                        </html>
+                    </html>
