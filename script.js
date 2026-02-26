@@ -1,6 +1,6 @@
-// ============================================
-// GLOBAL VARIABLES
-// ============================================
+/* ============================================
+   GLOBAL VARIABLES
+   ============================================ */
 var currentPage = 1;
 var isBlowing = false;
 var audioContext = null;
@@ -12,12 +12,15 @@ var musicEnabled = false;
 var heartsInterval = null;
 var lastTouchEnd = 0;
 
-// ============================================
-// PAGE NAVIGATION
-// ============================================
+/* ============================================
+   PAGE NAVIGATION
+   ============================================ */
 function goToPage(pageNum) {
+    // Hide current
     document.getElementById('page' + currentPage).classList.remove('active');
     stopPageEffects(currentPage);
+    
+    // Show new
     currentPage = pageNum;
     document.getElementById('page' + currentPage).classList.add('active');
     startPageEffects(currentPage);
@@ -26,17 +29,27 @@ function goToPage(pageNum) {
 function stopPageEffects(pageNum) {
     if (pageNum === 1) {
         var audio1 = document.getElementById('audio1');
-        if (audio1) audio1.pause();
+        if (audio1) {
+            audio1.pause();
+        }
     }
     
     if (pageNum === 2) {
+        // Stop hearts
         if (heartsInterval) {
             clearInterval(heartsInterval);
             heartsInterval = null;
         }
+        // Clear hearts container
+        var heartsBg = document.getElementById('heartsBg');
+        if (heartsBg) {
+            heartsBg.innerHTML = '';
+        }
+        // Stop audio
         var audio2 = document.getElementById('audio2');
-        if (audio2) audio2.pause();
-        document.getElementById('heartsBg').innerHTML = '';
+        if (audio2) {
+            audio2.pause();
+        }
     }
     
     if (pageNum === 3) {
@@ -56,34 +69,129 @@ function stopPageEffects(pageNum) {
 function startPageEffects(pageNum) {
     if (pageNum === 1) {
         if (musicEnabled) {
-            var audio1 = document.getElementById('audio1');
-            if (audio1) audio1.play().catch(function(e) {});
+            playAudio('audio1');
         }
     }
     
     if (pageNum === 2) {
+        // Start hearts
         startHeartsAnimation();
+        // Play audio
         if (musicEnabled) {
-            var audio2 = document.getElementById('audio2');
-            if (audio2) audio2.play().catch(function(e) {});
+            playAudio('audio2');
         }
     }
     
     if (pageNum === 3) {
         var video = document.getElementById('catVideo');
         if (video) {
-            video.pause();
             video.currentTime = 0;
             video.muted = true;
         }
-        document.getElementById('unmuteOverlay').classList.remove('hidden');
-        document.getElementById('videoEndScreen').classList.remove('show');
     }
 }
 
-// ============================================
-// VIDEO CONTROL (STARTS FROM BEGINNING, NO LOOP)
-// ============================================
+/* ============================================
+   AUDIO CONTROL (FIXED - NO DISTORTION)
+   ============================================ */
+function playAudio(audioId) {
+    var audio = document.getElementById(audioId);
+    if (audio) {
+        audio.volume = 1.0;
+        audio.currentTime = 0;
+        
+        var playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(e) {
+                console.log('Audio play error:', e);
+            });
+        }
+    }
+}
+
+function toggleMusic() {
+    musicEnabled = !musicEnabled;
+    var btn = document.getElementById('musicToggle');
+    
+    if (musicEnabled) {
+        btn.textContent = '🔊';
+        
+        if (currentPage === 1) {
+            playAudio('audio1');
+        } else if (currentPage === 2) {
+            playAudio('audio2');
+        }
+    } else {
+        btn.textContent = '🔇';
+        
+        var audio1 = document.getElementById('audio1');
+        var audio2 = document.getElementById('audio2');
+        
+        if (audio1) audio1.pause();
+        if (audio2) audio2.pause();
+    }
+}
+
+function enableMusic() {
+    musicEnabled = true;
+    document.getElementById('musicToggle').textContent = '🔊';
+    
+    if (currentPage === 1) {
+        playAudio('audio1');
+    }
+}
+
+/* ============================================
+   HEARTS ANIMATION (OPTIMIZED - NO GLITCH)
+   ============================================ */
+function startHeartsAnimation() {
+    var container = document.getElementById('heartsBg');
+    if (!container) return;
+    
+    var hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞'];
+    
+    // Create initial hearts
+    for (var i = 0; i < 10; i++) {
+        setTimeout(function() {
+            createHeart(container, hearts);
+        }, i * 300);
+    }
+    
+    // Keep creating hearts (slower rate to prevent glitch)
+    heartsInterval = setInterval(function() {
+        createHeart(container, hearts);
+    }, 400);
+}
+
+function createHeart(container, hearts) {
+    if (!container) return;
+    
+    // Limit total hearts to prevent lag
+    if (container.children.length > 25) {
+        if (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+    
+    var heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = (Math.random() * 90 + 5) + '%';
+    heart.style.fontSize = (Math.random() * 25 + 20) + 'px';
+    
+    container.appendChild(heart);
+    
+    // Remove after animation
+    setTimeout(function() {
+        if (heart && heart.parentNode) {
+            heart.parentNode.removeChild(heart);
+        }
+    }, 5000);
+}
+
+/* ============================================
+   VIDEO CONTROL
+   ============================================ */
 function playVideoWithSound() {
     var video = document.getElementById('catVideo');
     var overlay = document.getElementById('unmuteOverlay');
@@ -91,31 +199,26 @@ function playVideoWithSound() {
     var videoOverlay = document.getElementById('videoOverlay');
     var endScreen = document.getElementById('videoEndScreen');
     
-    if (video) {
-        // Reset to beginning
-        video.currentTime = 0;
-        
-        // Unmute and set volume
-        video.muted = false;
-        video.volume = 1.0;
-        
-        // Hide end screen if visible
-        endScreen.classList.remove('show');
-        
-        // Play video
-        var playPromise = video.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(function() {
-                overlay.classList.add('hidden');
-                soundToggle.classList.add('show');
-                soundToggle.textContent = '🔊';
-                videoOverlay.classList.add('show');
-            }).catch(function(error) {
-                console.log('Video play failed:', error);
-                alert('Video play nahi ho raha. Please try again!');
-            });
-        }
+    if (!video) return;
+    
+    video.currentTime = 0;
+    video.muted = false;
+    video.volume = 1.0;
+    
+    endScreen.classList.remove('show');
+    
+    var playPromise = video.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(function() {
+            overlay.classList.add('hidden');
+            soundToggle.classList.add('show');
+            soundToggle.textContent = '🔊';
+            videoOverlay.classList.add('show');
+        }).catch(function(error) {
+            console.log('Video error:', error);
+            alert('Video play nahi ho raha. Try again!');
+        });
     }
 }
 
@@ -125,19 +228,19 @@ function replayVideo() {
     var soundToggle = document.getElementById('soundToggle');
     var videoOverlay = document.getElementById('videoOverlay');
     
-    if (video) {
-        video.currentTime = 0;
-        video.muted = false;
-        video.volume = 1.0;
-        
-        endScreen.classList.remove('show');
-        soundToggle.classList.add('show');
-        videoOverlay.classList.add('show');
-        
-        video.play().catch(function(e) {
-            console.log('Replay failed:', e);
-        });
-    }
+    if (!video) return;
+    
+    video.currentTime = 0;
+    video.muted = false;
+    video.volume = 1.0;
+    
+    endScreen.classList.remove('show');
+    soundToggle.classList.add('show');
+    videoOverlay.classList.add('show');
+    
+    video.play().catch(function(e) {
+        console.log('Replay error:', e);
+    });
 }
 
 function toggleVideoSound() {
@@ -150,64 +253,20 @@ function toggleVideoSound() {
     }
 }
 
-// Video ended event
 function setupVideoEndEvent() {
     var video = document.getElementById('catVideo');
     if (video) {
         video.addEventListener('ended', function() {
-            var endScreen = document.getElementById('videoEndScreen');
-            var soundToggle = document.getElementById('soundToggle');
-            var videoOverlay = document.getElementById('videoOverlay');
-            
-            endScreen.classList.add('show');
-            soundToggle.classList.remove('show');
-            videoOverlay.classList.remove('show');
+            document.getElementById('videoEndScreen').classList.add('show');
+            document.getElementById('soundToggle').classList.remove('show');
+            document.getElementById('videoOverlay').classList.remove('show');
         });
     }
 }
 
-// ============================================
-// HEARTS ANIMATION (PAGE 2)
-// ============================================
-function startHeartsAnimation() {
-    var container = document.getElementById('heartsBg');
-    var hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞', '💟', '🩷'];
-    
-    for (var i = 0; i < 15; i++) {
-        (function(index) {
-            setTimeout(function() {
-                createHeart(container, hearts);
-            }, index * 200);
-        })(i);
-    }
-    
-    heartsInterval = setInterval(function() {
-        createHeart(container, hearts);
-    }, 300);
-}
-
-function createHeart(container, hearts) {
-    if (!container) return;
-    
-    var heart = document.createElement('div');
-    heart.className = 'floating-heart';
-    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
-    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-    
-    container.appendChild(heart);
-    
-    setTimeout(function() {
-        if (heart.parentNode) {
-            heart.remove();
-        }
-    }, 5000);
-}
-
-// ============================================
-// CANDLE BLOWING
-// ============================================
+/* ============================================
+   CANDLE BLOWING
+   ============================================ */
 async function startBlowing() {
     var blowBtn = document.getElementById('blowBtn');
     var progressContainer = document.getElementById('blowProgress');
@@ -247,8 +306,8 @@ async function startBlowing() {
         blowCheckInterval = setInterval(checkBlow, 100);
         
     } catch (err) {
-        console.error('Microphone error:', err);
-        alert('Microphone access chahiye! Please allow karo.');
+        console.error('Mic error:', err);
+        alert('Microphone allow karo!');
     }
 }
 
@@ -352,13 +411,13 @@ function stopBlowing() {
     });
 }
 
-// ============================================
-// CONFETTI
-// ============================================
+/* ============================================
+   CONFETTI
+   ============================================ */
 function createConfetti() {
-    var colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff69b4', '#a55eea', '#26de81', '#fd79a8'];
+    var colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff69b4', '#a55eea', '#26de81'];
     
-    for (var i = 0; i < 80; i++) {
+    for (var i = 0; i < 60; i++) {
         (function(index) {
             setTimeout(function() {
                 var confetti = document.createElement('div');
@@ -374,61 +433,27 @@ function createConfetti() {
                 
                 setTimeout(function() {
                     if (confetti.parentNode) {
-                        confetti.remove();
+                        confetti.parentNode.removeChild(confetti);
                     }
                 }, 4000);
-            }, index * 30);
+            }, index * 40);
         })(i);
     }
 }
 
-// ============================================
-// MUSIC CONTROL
-// ============================================
-function enableMusic() {
-    musicEnabled = true;
-    document.getElementById('musicToggle').textContent = '🔊';
-    
-    var audio1 = document.getElementById('audio1');
-    if (audio1 && currentPage === 1) {
-        audio1.play().catch(function(e) {
-            console.log('Audio play failed:', e);
-        });
-    }
-}
-
-function toggleMusic() {
-    musicEnabled = !musicEnabled;
-    var btn = document.getElementById('musicToggle');
-    
-    if (musicEnabled) {
-        btn.textContent = '🔊';
-        if (currentPage === 1) {
-            document.getElementById('audio1').play().catch(function(e) {});
-        } else if (currentPage === 2) {
-            document.getElementById('audio2').play().catch(function(e) {});
-        }
-    } else {
-        btn.textContent = '🔇';
-        document.getElementById('audio1').pause();
-        document.getElementById('audio2').pause();
-    }
-}
-
-// ============================================
-// INITIALIZATION
-// ============================================
+/* ============================================
+   INITIALIZATION
+   ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎂 Happy Birthday Appu! Website Ready!');
+    console.log('🎂 Happy Birthday Appu!');
     
-    // Setup video end event
     setupVideoEndEvent();
     
     // Prevent double tap zoom
-    document.addEventListener('touchend', function(event) {
+    document.addEventListener('touchend', function(e) {
         var now = Date.now();
         if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
+            e.preventDefault();
         }
         lastTouchEnd = now;
     }, false);
